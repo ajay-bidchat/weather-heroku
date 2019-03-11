@@ -5,6 +5,7 @@ const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
 const app = express()
+const port = process.env.PORT || 3000;
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public')
@@ -96,12 +97,22 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000.')
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}.`)
 })
 
 /**
  * Heroku cli commands
  * > heroku -v
  * > heroku login [Then press any key(except q) to login from the browser]
+ * > heroku keys:add
+ * > heroku create [app-name]
+ * Add a start script in package.json
+ * 
+ * https://weather-heroku-app.herokuapp.com/ | https://git.heroku.com/weather-heroku-app.git
+ * ssh-keygen -t rsa -b 4096 -C "email@address.com"
+ * eval "$(ssh-agent -s)"
+ * ssh-add path-to-private-key-file
+ * In the github settings add a new SSH keys
+ * ssh -T git@github.com [test if ssh is properly setup]
  */
